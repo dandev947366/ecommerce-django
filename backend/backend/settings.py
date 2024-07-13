@@ -5,8 +5,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG")
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(",")
+allowed_hosts = os.environ.get("ALLOWED_HOSTS", "")
 
+# Split the comma-separated values if the environment variable is not empty
+ALLOWED_HOSTS = allowed_hosts.split(',') if allowed_hosts else []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -14,7 +16,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'base'
+    'base',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
